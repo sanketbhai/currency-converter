@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Currency converter</title>
+        <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+        
+       fetch('https://api.exchangeratesapi.io/latest?base=USD')
+         .then(response => response.json())
+         .then(data=>{
+         
+        for( key in data.rates){
+        li= document.createElement('option');
+       li.innerHTML=key;
+       li2=document.createElement('option');
+       li2.innerHTML=key;
+       document.getElementById('body').appendChild(li);
+       document.getElementById('body1').appendChild(li2)
+        }
+        
+        })
+         
+
+            
+            
+         document.getElementById('btn').onclick=()=>{ 
+             from=document.getElementById('body').value;
+             to=document.getElementById('body1').value;
+             amount=document.getElementById('amount').value
+             fetch("https://api.exchangeratesapi.io/latest?base=USD")
+         .then(response => response.json())
+         .then(data=>{
+            usd=amount/data.rates[from];
+            result=usd*data.rates[to];
+            document.getElementById('result').innerHTML=result.toFixed(4)
+            })
+         }
+         
+         
+        });
+    </script>
+    <style type="text/css" media="all">
+        .jumbotron {
+ background: url(money.jpg) fixed center no-repeat;
+ background-size: cover;
+}
+    </style>
+  </head>
+  <body class="jumbotron">
+
+<!-- As a heading -->
+<nav class="navbar navbar-primary bg-primary">
+  <div class="container-fluid">
+    <span class="navbar-brand text-light mb-0 h1">Currency converterr</span>
+  </div>
+</nav>
+      <div class="container">
+          
+
+  
+    <label class="form-label" for="cunvertfrom">Cunvert from</label>
+        <select class="form-select" id ='body'>
+            hii
+            
+        </select>
+        <label for="convertto">Convert to</label>
+        <select class="form-select"id ='body1'>
+            hii
+            
+        </select>
+        <input type="number" class="form-control mt-4" id="amount" placeholder="enter amout" />
+        <h1 id="result">
+            
+        </h1>
+        <button class="btn btn-outline-danger btn-secondary btn-lg"id="btn">convert</button>
+      </div>
+      
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
